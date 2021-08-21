@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { PostComponent } from './post/post.component';
+import { PortalComponent } from './portal/portal.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: PostComponent
+    component: PortalComponent
   }
 ];
 
