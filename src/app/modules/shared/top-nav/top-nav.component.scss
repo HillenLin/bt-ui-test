@@ -1,0 +1,9 @@
+.logo-wrapper {
+  width: 100%;
+  background: #00232b;
+  text-align: center;
+  &>img {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}

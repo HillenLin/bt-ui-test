@@ -6,9 +6,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { FirstNamePipe } from '../../pipes/first-name.pipe';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TopNavComponent } from './top-nav/top-nav.component';
 
 @NgModule({
-  declarations: [FirstNamePipe],
+  declarations: [FirstNamePipe, TopNavComponent],
   imports: [
     CommonModule,
     MatButtonModule,
@@ -23,7 +24,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatDividerModule,
     MatIconModule,
     MatProgressSpinnerModule,
-    FirstNamePipe
+    FirstNamePipe,
+    TopNavComponent
   ]
 })
 export class SharedModule {}
