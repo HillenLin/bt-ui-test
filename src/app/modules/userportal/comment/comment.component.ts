@@ -32,7 +32,6 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(): void {
-    console.log(`post id is changed ${this.postId} `);
     this.isError = false;
     this.isLoadingComments = true;
     this.isLoadedComments = false;
