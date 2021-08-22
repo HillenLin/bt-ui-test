@@ -1,4 +1,12 @@
-<div class="container">
+<ng-container *ngIf="isError">
+  <p class="error">Sorry, the service is not available right now</p>
+</ng-container>
+
+<ng-container *ngIf="isLoadingUsers">
+  <mat-spinner></mat-spinner>
+</ng-container>
+
+<div *ngIf="isLoadedUsers" class="container">
   <h2>Please select a user to find their comments</h2>
   <div class="row">
     <ng-container *ngFor="let user of allUsers; let i = index">
@@ -10,13 +18,13 @@
           [attr.aria-label]="'Please click this button to read all posts from ' + (user.name | firstName)"
           (click)="bindSelectedUserId(i+1)"
         >
-          {{user.name | firstName}}
+        {{user.name | firstName}}
         </button>
       </div>
     </ng-container>
   </div>
+  <mat-divider></mat-divider>
 </div>
-<mat-divider></mat-divider>
 <div class="container">
   <h2 *ngIf="selectedusername">Posts from {{selectedusername | firstName}}</h2>
 </div>

@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { delay, takeUntil } from 'rxjs/operators';
 import { Post } from 'src/app/models/post';
 import { HttpService } from 'src/app/services/http.service';
 
@@ -18,6 +18,11 @@ export class PostComponent implements OnInit, OnChanges, OnDestroy {
   displayedPosts: Post[] = [];
   selectedPostId!: number;
 
+  // Those flags indicate the status of HTTP Get request
+  isLoadingPosts = true;
+  isLoadedPosts = false;
+  isError = false;
+
   constructor(private httpService: HttpService) {}
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -29,9 +34,13 @@ export class PostComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnChanges(): void {
-    console.log('user id is changed');
+    this.isLoadingPosts = true;
+    this.isError = false;
+    this.isLoadedPosts = false;
+
     this.httpService
       .getUserPostService(this.userId)
+      .pipe(delay(500))
       .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         (res) => {
@@ -41,6 +50,12 @@ export class PostComponent implements OnInit, OnChanges, OnDestroy {
         },
         (error: HttpErrorResponse) => {
           console.error(error);
+          this.isError = true;
+          this.isLoadingPosts = false;
+        },
+        () => {
+          this.isLoadedPosts = true;
+          this.isLoadingPosts = false;
         }
       );
   }

@@ -1,4 +1,12 @@
-<div class="container">
+<ng-container *ngIf="isError">
+  <p class="error">Sorry, the service is not available right now</p>
+</ng-container>
+
+<ng-container *ngIf="isLoadingPosts">
+  <mat-spinner></mat-spinner>
+</ng-container>
+
+<div *ngIf="isLoadedPosts" class="container">
   <ng-container *ngFor="let post of displayedPosts; let i = index">
     <div class="row">
       <div class="col-sm-12 col-md-10 col-lg-10">

@@ -1,4 +1,12 @@
-  <mat-card class="post-card">
+<ng-container *ngIf="isError">
+  <p class="error">Sorry, the service is not available right now</p>
+</ng-container>
+
+<ng-container *ngIf="isLoadingComments">
+  <mat-spinner></mat-spinner>
+</ng-container>
+
+  <mat-card *ngIf="isLoadedComments" class="post-card">
     <ng-container *ngFor="let comment of allComments; let i = index">
       <p class="comment-header"><b>{{comment.name}}</b> | Email: {{comment.email}}</p>
       <p class="comment-body">{{comment.body}}</p>

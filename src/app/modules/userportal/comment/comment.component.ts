@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { delay, takeUntil } from 'rxjs/operators';
 import { HttpService } from 'src/app/services/http.service';
 import { Comment } from 'src/app/models/comment';
 
@@ -15,6 +15,12 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
   @Input()
   postId!: number;
   allComments: Comment[] | undefined;
+
+  // Those flags indicate the status of HTTP Get request
+  isLoadingComments = true;
+  isLoadedComments = false;
+  isError = false;
+
   constructor(private httpService: HttpService) {}
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -27,16 +33,26 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
 
   ngOnChanges(): void {
     console.log(`post id is changed ${this.postId} `);
+    this.isError = false;
+    this.isLoadingComments = true;
+    this.isLoadedComments = false;
     this.httpService
       .getCommentService(this.postId)
+      .pipe(delay(500))
       .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         (res) => {
           console.log(res);
           this.allComments = res;
         },
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         (error: HttpErrorResponse) => {
-          console.error(error);
+          this.isError = true;
+          this.isLoadingComments = false;
+        },
+        () => {
+          this.isLoadedComments = true;
+          this.isLoadingComments = false;
         }
       );
   }
