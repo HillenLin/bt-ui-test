@@ -1,1 +1,27 @@
-<p>post works!</p>
+<div class="container">
+  <ng-container *ngFor="let post of firstThreePosts; let i = index">
+    <div class="row">
+      <div class="col-sm-12 col-md-10 col-lg-10">
+        <mat-card class="post-card">
+          <mat-card-title>{{post.title}}</mat-card-title>
+          <p>{{post.body}}</p>
+        </mat-card>
+      </div>
+      <div class="col-sm-12 col-md-2 col-lg-2 button-wrapper">
+        <button
+          mat-raised-button
+          color="basic"
+          class="add"
+          aria-label="Please click this button to read comments from this post"
+        >
+          +
+        </button>
+      </div>
+    </div>
+  </ng-container>
+  <div class="row">
+    <div class="col-sm-12 col-md-10 col-lg-10">
+      <button aria-label="Please click this button to read all posts" mat-raised-button class="right-aligned" color="basic">...Load all</button>
+    </div>
+  </div>
+</div>

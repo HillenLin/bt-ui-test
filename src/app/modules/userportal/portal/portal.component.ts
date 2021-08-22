@@ -12,7 +12,9 @@ import { HttpService } from 'src/app/services/http.service';
 })
 export class PortalComponent implements OnInit, OnDestroy {
   private ngUnsubscribe$ = new Subject();
-  allUsers: User[] | undefined;
+  allUsers: User[] = [];
+  selectedUserId!: number;
+  selectedusername: string | undefined;
   constructor(private httpService: HttpService) {}
 
   ngOnInit(): void {
@@ -26,9 +28,6 @@ export class PortalComponent implements OnInit, OnDestroy {
         },
         (error: HttpErrorResponse) => {
           console.error(error);
-        },
-        () => {
-          //codes should be executed after the completion of the API call
         }
       );
   }
@@ -36,5 +35,10 @@ export class PortalComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.ngUnsubscribe$.next();
     this.ngUnsubscribe$.complete();
+  }
+
+  bindSelectedUserId(bindedId: number): void {
+    this.selectedUserId = bindedId;
+    this.selectedusername = this.allUsers[bindedId - 1].name;
   }
 }

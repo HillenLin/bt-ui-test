@@ -1,5 +1,9 @@
 button {
   width: 100%;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  &.active {
+    background-color: #006f97;
+    color: white;
+  }
 }

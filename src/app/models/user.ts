@@ -17,7 +17,7 @@ export interface Company {
 }
 
 export interface User {
-  id: string;
+  id: number;
   name: string;
   username: string;
   address: Address;

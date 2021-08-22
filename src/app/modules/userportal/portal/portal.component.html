@@ -1,9 +1,23 @@
 <div class="container">
+  <h2>Please select a user to find their comments</h2>
   <div class="row">
     <ng-container *ngFor="let user of allUsers; let i = index">
       <div class="col-sm-12 col-md-3 col-lg-2">
-        <button mat-raised-button color="basic">{{user.name | firstName}}</button>
+        <button 
+          mat-raised-button 
+          color="basic"
+          [ngClass]="{'active' : selectedUserId === i+1}"
+          [attr.aria-label]="'Please click this button to read all posts from ' + (user.name | firstName)"
+          (click)="bindSelectedUserId(i+1)"
+        >
+          {{user.name | firstName}}
+        </button>
       </div>
     </ng-container>
   </div>
 </div>
+<mat-divider></mat-divider>
+<div class="container">
+  <h2 *ngIf="selectedusername">Posts from {{selectedusername | firstName}}</h2>
+</div>
+<app-post *ngIf="selectedUserId" [userId]="selectedUserId"></app-post>

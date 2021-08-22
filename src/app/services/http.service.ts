@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FAKE_API_URL } from '../models/urls';
 import { User } from '../models/user';
+import { Post } from '../models/posts';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,12 @@ export class HttpService {
   }
 
   // Fetches all posts by user id.
+  //https://jsonplaceholder.typicode.com/posts?userId=1
+  getUserPostService(userId: number): Observable<Post[]> {
+    return this.http
+      .get<Post[]>(`${FAKE_API_URL}posts?userId=${userId}`)
+      .pipe(catchError(this.errorHandler));
+  }
 
   // Call back method for error handling
   private errorHandler(errorResponse: HttpErrorResponse) {

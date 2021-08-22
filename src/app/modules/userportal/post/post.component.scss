@@ -1,0 +1,28 @@
+.post-card {
+  margin-top: 1rem;
+  background-color: #f1f1f1;
+  color: black;
+}
+.button-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+button.bigger-btn {
+  height: 100%;
+  margin-top: 1rem;
+  color: #006f97;
+}
+button.add {
+  font-size: 2rem;
+}
+.right-aligned {
+  float: right;
+  margin-top: 1rem;
+  background: #e3e8ed;
+}
+
+::ng-deep mat-icon.bigger-icon {
+  line-height: 48px !important; //overwrite default library style
+  font-size: 48px;
+}
