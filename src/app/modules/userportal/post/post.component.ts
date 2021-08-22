@@ -44,7 +44,6 @@ export class PostComponent implements OnInit, OnChanges, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         (res) => {
-          console.log(res);
           this.posts = res;
           this.displayedPosts = this.posts.filter((e, i) => i <= 2);
         },
@@ -61,7 +60,6 @@ export class PostComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   loadAllPosts(): void {
-    console.log(this.posts);
     this.displayedPosts = this.posts;
   }
 

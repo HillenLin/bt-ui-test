@@ -30,7 +30,6 @@ export class PortalComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         (res: User[]) => {
-          console.log(res);
           this.allUsers = res;
         },
         // eslint-disable-next-line @typescript-eslint/no-unused-vars

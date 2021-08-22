@@ -41,7 +41,6 @@ export class CommentComponent implements OnInit, OnChanges, OnDestroy {
       .pipe(takeUntil(this.ngUnsubscribe$))
       .subscribe(
         (res) => {
-          console.log(res);
           this.allComments = res;
         },
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
