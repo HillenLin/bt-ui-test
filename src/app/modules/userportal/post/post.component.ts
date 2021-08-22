@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, Input, OnChanges, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Post } from 'src/app/models/posts';
+import { Post } from 'src/app/models/post';
 import { HttpService } from 'src/app/services/http.service';
 
 @Component({
@@ -14,9 +14,9 @@ export class PostComponent implements OnInit, OnChanges, OnDestroy {
   private ngUnsubscribe$ = new Subject();
   @Input()
   userId!: number;
-  posts: Post[] | undefined;
-  firstThreePosts: Post[] | undefined;
-  extendedPosts: Post[] | undefined;
+  posts: Post[] = [];
+  displayedPosts: Post[] = [];
+  selectedPostId!: number;
 
   constructor(private httpService: HttpService) {}
 
@@ -37,12 +37,20 @@ export class PostComponent implements OnInit, OnChanges, OnDestroy {
         (res) => {
           console.log(res);
           this.posts = res;
-          this.firstThreePosts = this.posts.filter((e, i) => i <= 2);
-          this.extendedPosts = this.posts.filter((e, i) => i > 2);
+          this.displayedPosts = this.posts.filter((e, i) => i <= 2);
         },
         (error: HttpErrorResponse) => {
           console.error(error);
         }
       );
+  }
+
+  loadAllPosts(): void {
+    console.log(this.posts);
+    this.displayedPosts = this.posts;
+  }
+
+  bindSelectedPostId(bindedId: number): void {
+    this.selectedPostId = bindedId;
   }
 }

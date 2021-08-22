@@ -1,10 +1,11 @@
 <div class="container">
-  <ng-container *ngFor="let post of firstThreePosts; let i = index">
+  <ng-container *ngFor="let post of displayedPosts; let i = index">
     <div class="row">
       <div class="col-sm-12 col-md-10 col-lg-10">
         <mat-card class="post-card">
           <mat-card-title>{{post.title}}</mat-card-title>
           <p>{{post.body}}</p>
+          <app-comment *ngIf="selectedPostId === post.id" [postId]="selectedPostId"></app-comment>
         </mat-card>
       </div>
       <div class="col-sm-12 col-md-2 col-lg-2 button-wrapper">
@@ -13,15 +14,17 @@
           color="basic"
           class="add"
           aria-label="Please click this button to read comments from this post"
+          (click)="bindSelectedPostId(post.id)"
         >
           +
         </button>
       </div>
     </div>
   </ng-container>
-  <div class="row">
+  <div class="row" *ngIf="displayedPosts.length <= 3">
     <div class="col-sm-12 col-md-10 col-lg-10">
-      <button aria-label="Please click this button to read all posts" mat-raised-button class="right-aligned" color="basic">...Load all</button>
+      <button (click)="loadAllPosts()" aria-label="Please click this button to read all posts" mat-raised-button class="right-aligned" color="basic">...Load all</button>
     </div>
   </div>
 </div>
+

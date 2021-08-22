@@ -8,11 +8,6 @@
   align-items: center;
   justify-content: center;
 }
-button.bigger-btn {
-  height: 100%;
-  margin-top: 1rem;
-  color: #006f97;
-}
 button.add {
   font-size: 2rem;
 }
@@ -21,6 +16,14 @@ button.add {
   margin-top: 1rem;
   background: #e3e8ed;
 }
+
+// Small devices (landscape phones, less than 768px)
+@media (max-width: 767.98px) { 
+  button.add {
+    margin-top: 1rem;
+
+  }
+ }
 
 ::ng-deep mat-icon.bigger-icon {
   line-height: 48px !important; //overwrite default library style

@@ -4,7 +4,8 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { FAKE_API_URL } from '../models/urls';
 import { User } from '../models/user';
-import { Post } from '../models/posts';
+import { Post } from '../models/post';
+import { Comment } from '../models/comment';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,14 @@ export class HttpService {
   getUserPostService(userId: number): Observable<Post[]> {
     return this.http
       .get<Post[]>(`${FAKE_API_URL}posts?userId=${userId}`)
+      .pipe(catchError(this.errorHandler));
+  }
+
+  // Fetches all comments by post id
+  // https://jsonplaceholder.typicode.com/comments?postId=1
+  getCommentService(postId: number): Observable<Comment[]> {
+    return this.http
+      .get<Comment[]>(`${FAKE_API_URL}comments?postId=${postId}`)
       .pipe(catchError(this.errorHandler));
   }
 

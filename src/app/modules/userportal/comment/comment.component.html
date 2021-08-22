@@ -1,1 +1,7 @@
-<p>comment works!</p>
+  <mat-card class="post-card">
+    <ng-container *ngFor="let comment of allComments; let i = index">
+      <p class="comment-header"><b>{{comment.name}}</b> | Email: {{comment.email}}</p>
+      <p class="comment-body">{{comment.body}}</p>
+      <mat-divider></mat-divider>
+    </ng-container>
+  </mat-card>
